@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+    
+    <!-- FOR SWEET ALERT FA CDNJS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="styles/style.css" />
+    <title>Bookshelf Apps</title>
+  </head>
+  <body>
+
+    <header class="head_bar">
+      <h1 class="head_bar__title" id="title-bar">
+        <i class="fas fa-book-reader    "></i>
+        Bookshelf Apps
+      </h1>
+    </header>
+
+    <main>
+
+      <div class="content">
+        <!-- SEARCH -->
+        <section class="search_section">
+          <h2>Search Books</h2>
+          <form id="searchBook">
+            <input
+              id="searchBookTitle"
+              type="text"
+              placeholder="search here..."
+            />
+            <button id="searchSubmit" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Cari</button>
+          </form>
+        </section>
+        <!-- BOOKSHELF -->
+        <section class="rak_section">
+          <h2>BookShelf</h2>
+          <div class="rak_book">
+            <div class="book_shelf">
+              <h2>Belum selesai dibaca</h2>
+  
+              <div id="incompleteBookshelfList" class="uncompletedBookList">
+                
+              </div>
+            </div>
+  
+            <div class="book_shelf">
+              <h2>Selesai dibaca</h2>
+  
+              <div id="completeBookshelfList" class="completedBookList">
+                
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside>
+        <!-- ADD A BOOK -->
+        <section class="input_section">
+          <h2 id="title_form">Masukkan Buku Baru</h2>
+          <form id="inputBook">
+            <div class="input">
+              <label for="inputBookTitle">Judul</label>
+              <input
+                id="inputBookTitle"
+                type="text"
+                placeholder="ex : Introducing to Javascript"
+                required
+              />
+            </div>
+            <div class="input">
+              <label for="inputBookAuthor">Penulis</label>
+              <input
+                id="inputBookAuthor"
+                type="text"
+                placeholder="ex : Brendan Eich"
+                required
+              />
+            </div>
+            <div class="input">
+              <label for="inputBookYear">Tahun</label>
+              <input
+                id="inputBookYear"
+                type="number"
+                placeholder="ex : 1995"
+                required
+              />
+            </div>
+            <div class="input_inline">
+              <label for="inputBookIsComplete">Selesai dibaca</label>
+              <input id="inputBookIsComplete" type="checkbox" />
+            </div>
+            <button id="bookSubmit" type="submit">
+              Masukkan Buku ke <span>Rak Buku</span>
+            </button>
+          </form>
+        </section>
+      </aside>
+      
+    </main>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

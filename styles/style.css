@@ -1,0 +1,308 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito Sans', sans-serif;
+    text-decoration: none;
+}
+body {
+    background-color: #16101b;
+}
+
+/* ------- HEADER ------- */
+.head_bar {
+    padding: 16px;
+    width: 100%;
+    letter-spacing: 1px;
+    background-color: #1e093f;
+    color: #d3c9d9;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+/* ------- MAIN ------- */
+main {
+    height: 100vh;
+    width: 95%;
+    margin: 0 auto;
+    padding-top: 100px;
+    display: flex;
+}
+.content {
+    flex-basis: 70%;
+    padding: 16px;
+}
+aside {
+    flex-basis: 30%;
+    padding: 16px;
+}
+
+/* ------- SEARCH SECTION ------- */
+.search_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 16px;
+    background-color: #2c0f5a;
+    border: 1px solid #000;
+    border-radius: 10px;
+}
+.search_section > h2 {
+    color: #cfc9d9;
+}
+.search_section > form {
+    width: 100%;
+    display: grid;
+    padding: 16px;
+    grid-template-columns: 1fr 0.5fr ;
+    grid-gap: 10px;
+}
+.search_section > form > input {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #34303d;
+    background-color: #fff;
+    color: #1e093f;
+}
+.search_section > form > button {
+    background-color: #a02e2e;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.search_section>form>button:hover,
+.input_section>form>button:hover {
+    background-color: #3fb950
+}
+
+/* ------- RAK SECTION ------- */
+.rak_section {
+    width: 100%;
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: #2c0f5a;
+}
+.rak_section h2 {
+    text-align: center;
+    padding-bottom: 16px;
+    color: #cdc9d9;
+}
+.rak_book {
+    display: flex;
+    flex-direction: row;
+    padding: 16px 0;
+    border-radius: 10px;
+}
+.rak_book h2 {
+    color: #2c0f5a;
+}
+.book_shelf {
+    width: 100%;
+    margin: 4px;
+    border: 1px solid black;
+    padding: 16px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+.book_shelf .completedBookList .container-books {
+    padding: 16px;
+    margin: 10px 0;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #2c0f5a;
+}
+.book_shelf .uncompletedBookList .container-books {
+    padding: 16px;
+    margin: 10px 0;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #2c0f5a;
+}
+.rak_section  h3 {
+    margin: 5px 0;
+    color: #c9d1d9;
+}
+.rak_section h4 {
+    margin: 5px 0;
+    color: #c9d1d9;
+    font-weight: lighter;
+}
+.rak_section button {
+    border: 0;
+    padding: 5px;
+    margin: 0 8px 0 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.rak_section .green {
+    background-color: #2ea043;
+    color: #c9d1d9;
+}
+.rak_section .green:hover {
+    background-color: #3fb950;
+}
+.rak_section .red {
+    background-color: #a02e2e;
+    color: #c9d1d9;
+}
+.rak_section .red:hover {
+    background-color: rgb(235, 80, 80);;
+}
+.rak_section .finish {
+    background-color: #2ea043;
+    color: #c9d1d9;
+}
+.rak_section .finish:hover {
+    background-color: #3fb950;
+}
+
+/* ------- INPUT SECTION ------- */
+.input_section {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #2c0f5a;
+}
+.input_section > h2 {
+    text-align: center;
+    color: #c9d1d9;
+}
+.input_section > form > .input {
+    margin: 8px 0;
+}
+.input_section > form > button {
+    background-color: #a02e2e;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    padding: 8px;
+    cursor: pointer;
+}
+.input_section > form > button > span {
+    font-weight: bold;
+}
+.input_section > form > .input > input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    display: block;
+    border-radius: 5px;
+    border: 1px solid #30363d;
+    background-color: #fff;
+    color: #2c0f5a;
+}
+.input_section > form > .input > label {
+    color: #c9d1d9;
+    font-weight: bold;
+
+}
+.input_section > form > .input_inline {
+    margin: 12px 0;
+    display: flex;
+    align-items: center;
+}
+.input_section > form > .input_inline > label {
+    color: #c9d1d9;
+    font-weight: bold;
+    margin-right: 10px;
+}
+input, button {
+    font-size: 16px;
+}
+
+/* ------- SWEET ALERT ------- */
+.swal-modal {
+    background-color: #2c0f5a;
+    border: 2px solid #040404;
+}
+.swal-title {
+    color: #c9d1d9;
+}
+.swal-text {
+    color: #c9d1d9;
+}
+.swal-button--confirm {
+    background-color: #2ea043;
+}
+.swal-button--danger {
+    background-color: #b62324;
+}
+.swal-button--cancel {
+    background-color: #d1c9d9;
+}
+.swal-icon--success:after {
+    background: #2c0f5a;
+}
+.swal-icon--success::before {
+    background: #2c0f5a;
+}
+.swal-icon--success__hide-corners {
+    background: #2c0f5a;
+}
+
+/* -------- RESPONSIVE BREAKPOINT  -------- */
+
+@media (max-width: 1024px){
+    .book_shelf .completedBookList .container-books button {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: 10px 0;
+    }
+    .book_shelf .uncompletedBookList .container-books button {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: 10px 0;
+    }   
+}
+
+@media (max-width: 768px){
+    main {
+        flex-direction: column;
+    }
+    .search_section > form {
+        display: flex;
+        flex-direction: column;
+    }
+    .search_section > form > button {
+        padding: 8px;
+    }
+    .rak_book {
+        display: flex;
+        flex-direction: column;
+    }
+    .book_shelf .uncompletedBookList .container-books button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        align-items: center;
+        margin: 10px 0 10px 0;
+    }
+    .book_shelf .completedBookList .container-books button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        align-items: center;
+        margin: 10px 0 10px 0;
+    }
+}
