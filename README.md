@@ -43,95 +43,89 @@ const bookData = {
 - **Add New Book**
 
   ```javascript
-  const addBook = (event) => {
-    event.preventDefault();
-
-    const title = document.getElementById("bookFormTitle").value;
-    const author = document.getElementById("bookFormAuthor").value;
-    const year = parseInt(document.getElementById("bookFormYear").value);
+  function addBook() {
+    const titleBook = document.getElementById("title").value;
+    const authorBook = document.getElementById("author").value;
+    const yearBook = document.getElementById("year").value;
     const isComplete = document.getElementById("bookFormIsComplete").checked;
 
-    const newBook = {
-      id: generateId(),
-      title,
-      author,
-      year,
-      isComplete,
-    };
+    const generatedID = generateId();
+    const bookshelfObject = generatebookshelfObject(
+      generatedID,
+      titleBook,
+      authorBook,
+      yearBook,
+      isComplete
+    );
 
-    books.push(newBook);
-    saveBooks();
-    renderBooks();
+    bookshelfs.push(bookshelfObject);
+    document.dispatchEvent(new Event(RENDER_EVENT));
+    saveData();
   };
+  
   ```
 - **Edit Book**
 
   ```javascript
-  const editBook = (id) => {
-    if (editingBookId === id) {
-      hideEditForm();
-    } else {
-      const book = books.find((b) => b.id === id);
-      if (book) {
-        showEditForm(book);
-      }
+  function editBook(bookId) {
+    const book = findbookshelf(bookId);
+    if (book) {
+      document.getElementById("title").value = book.title;
+      document.getElementById("author").value = book.author;
+      document.getElementById("year").value = book.year;
+  
+      const submitButton = document.getElementById("submit");
+      submitButton.innerText = "Simpan Perubahan";
+      submitButton.onclick = function (event) {
+        event.preventDefault();
+        updateBook(bookId);
+        submitButton.innerText = "Tambahkan Buku";
+        submitButton.onclick = addBook;
+      };
     }
   };
 
-  const handleEditFormSubmit = (event) => {
-    event.preventDefault();
-    const updatedBook = {
-      id: editingBookId,
-      title: editFormTitle.value,
-      author: editFormAuthor.value,
-      year: parseInt(editFormYear.value),
-      isComplete: editFormIsComplete.checked,
-    };
-    books = books.map((book) =>
-      book.id === editingBookId ? updatedBook : book
-    );
-    saveBooks();
-    renderBooks();
-    hideEditForm();
-  };
   ```
-- **Delete Book**
+- **Remove Book**
 
   ```javascript
-  const deleteBook = (id) => {
-    if (confirm("Are you sure you want to delete this book?")) {
-      books = books.filter((b) => b.id !== id);
-      saveBooks();
-      renderBooks();
-      if (editingBookId === id) {
-        hideEditForm();
-      }
-    }
+  function removeTaskFromCompleted(bookshelfId) {
+    const bookshelfTarget = findbookselfIndex(bookshelfId);
+  
+    if (bookshelfTarget === -1) return;
+  
+    bookshelfs.splice(bookshelfTarget, 1);
+    document.dispatchEvent(new Event(RENDER_EVENT));
+    saveData();
   };
+  
   ```
 
 ### 2. Search Feature
 
 ```javascript
-const searchBooks = (event) => {
-  event.preventDefault();
-  const searchTerm = document
-    .getElementById("searchBookTitle")
-    .value.toLowerCase();
-  const filteredBooks = books.filter((book) =>
-    book.title.toLowerCase().includes(searchTerm)
-  );
-  renderBooks(filteredBooks);
+const searchBox = document.getElementById("search-box");
+searchBox.addEventListener("input", function () {
+  const searchTerm = searchBox.value.toLowerCase();
+  const uncompletedbookshelfList = document.getElementById("bookshelf");
+  const completedbookshelfList = document.getElementById("completed-bookshelf");
 
-  // Notification if no books are found
-  const notification = document.getElementById("notification");
-  if (filteredBooks.length === 0) {
-    notification.style.display = "block";
-    notification.textContent = "No books found!";
-  } else {
-    notification.style.display = "none";
+  uncompletedbookshelfList.innerHTML = '';
+  completedbookshelfList.innerHTML = '';
+
+  for (const bookshelfItem of bookshelfs) {
+    if (bookshelfItem.title.toLowerCase().includes(searchTerm)) {
+      const bookshelfElement = makebookshelf(bookshelfItem);
+
+      if (!bookshelfItem.isComplete) {
+        uncompletedbookshelfList.append(bookshelfElement);
+      } else {
+        completedbookshelfList.append(bookshelfElement);
+      }
+    }
   }
-};
+});
+
 ```
 
 ### 3. Reading Status Management
@@ -150,39 +144,67 @@ const toggleBookComplete = (id) => {
 ### 4. Local Data Storage
 
 ```javascript
-// Save data to localStorage
-const saveBooks = () => {
-  localStorage.setItem("books", JSON.stringify(books));
-};
+function loadDataFromStorage() {
+  const serializedData = localStorage.getItem(STORAGE_KEY);
+  let data = JSON.parse(serializedData);
 
-// Load data from localStorage when the app starts
-let books = JSON.parse(localStorage.getItem("books")) || [];
+  if (data !== null) {
+    for (const bookshelf of data) {
+      bookshelfs.push(bookshelf);
+    }
+  }
+
+  document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
 ```
 
 ### 5. Rendering and UI Updates
 
 ```javascript
-const renderBooks = (filteredBooks = books) => {
-  incompleteList.innerHTML = "";
-  completeList.innerHTML = "";
+document.addEventListener(RENDER_EVENT, function () {
+  const uncompletedbookshelfList = document.getElementById("bookshelf");
+  uncompletedbookshelfList.innerHTML = "";
+  const completedbookshelfList = document.getElementById("completed-bookshelf");
+  completedbookshelfList.innerHTML = "";
 
-  filteredBooks.forEach((book) => {
-    const bookElement = createBookElement(book);
-    if (book.isComplete) {
-      completeList.appendChild(bookElement);
+  for (const bookshelfItem of bookshelfs) {
+    const bookshelfElement = makebookshelf(bookshelfItem);
+    
+    if (!bookshelfItem.isComplete) {
+      uncompletedbookshelfList.append(bookshelfElement);
     } else {
-      incompleteList.appendChild(bookElement);
+      completedbookshelfList.append(bookshelfElement);
     }
-  });
-};
+  }
+});
 
-const createBookElement = (book) => {
-  const bookElement = document.createElement("div");
-  bookElement.className = "book-item";
-  bookElement.setAttribute("data-bookid", book.id);
-  // ... configure book element
-  return bookElement;
-};
+document.addEventListener(SAVED_EVENT, function () {
+  console.log(localStorage.getItem(STORAGE_KEY));
+});
+
+const searchBox = document.getElementById("search-box");
+searchBox.addEventListener("input", function () {
+  const searchTerm = searchBox.value.toLowerCase();
+  const uncompletedbookshelfList = document.getElementById("bookshelf");
+  const completedbookshelfList = document.getElementById("completed-bookshelf");
+
+  uncompletedbookshelfList.innerHTML = '';
+  completedbookshelfList.innerHTML = '';
+
+  for (const bookshelfItem of bookshelfs) {
+    if (bookshelfItem.title.toLowerCase().includes(searchTerm)) {
+      const bookshelfElement = makebookshelf(bookshelfItem);
+
+      if (!bookshelfItem.isComplete) {
+        uncompletedbookshelfList.append(bookshelfElement);
+      } else {
+        completedbookshelfList.append(bookshelfElement);
+      }
+    }
+  }
+});
+
 ```
 
 ## License
