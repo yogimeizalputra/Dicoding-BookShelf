@@ -7,6 +7,9 @@ Submission Project for the 'Create Front-End Web for Beginners' course by Dicodi
 
 The Bookshelf App is a web application for managing books, allowing users to handle their book lists with interactive features. The app is built using pure HTML, CSS, and JavaScript with a DOM manipulation approach.
 
+## Preview
+
+![screenshot20241127190516](https://github.com/user-attachments/assets/e0191d77-ef67-42c2-9699-5b6f1f9af9fd)
 
 ## Technologies Used
 
